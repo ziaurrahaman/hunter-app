@@ -24,9 +24,23 @@ class _HunterCardHomePageState extends State<HunterCardHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var appBar = AppBar(
+      backgroundColor: Color(0xff000c4f),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(
+            Icons.search,
+            color: Colors.white,
+          ),
+          onPressed: () {},
+        ),
+      ],
+    );
     final deviceSize = MediaQuery.of(context).size;
     CarouselSlider carouselSlider;
-
+    var _pageSize = MediaQuery.of(context).size.height;
+    var _notifySize = MediaQuery.of(context).padding.top;
+    var _appBarSize = appBar.preferredSize.height;
     List imgList = [
       MembershipCard(),
       MembershipCard(),
@@ -68,267 +82,237 @@ class _HunterCardHomePageState extends State<HunterCardHomePage> {
     }
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.amber,
-        child: Icon(
-          MdiIcons.dotsVertical,
-          color: Colors.white,
-        ),
-        onPressed: () {},
-      ),
-      appBar: AppBar(
-        backgroundColor: Color(0xff000c4f),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.search,
-              color: Colors.white,
-            ),
-            onPressed: () {},
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.amber,
+          child: Icon(
+            MdiIcons.dotsVertical,
+            color: Colors.white,
           ),
-        ],
-      ),
-      drawer: Drawer(),
-      body: Container(
-        color: Color(0xff31c3d6),
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              flex: 8,
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  child: ListView(
-                    children: <Widget>[
-                      Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10))),
-                        margin: EdgeInsets.all(10),
-                        elevation: 4,
-                        color: Colors.amber,
-                        child: Column(
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                IconButton(
-                                  alignment: Alignment.centerLeft,
-                                  iconSize: 48,
-                                  icon: Icon(
-                                    Icons.gps_fixed,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: () {},
-                                ),
-                                Spacer(),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 16),
-                                  child: Text(
-                                    'Hunter Card',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 32),
-                                  ),
-                                ),
-                                Spacer()
-                              ],
-                            ),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 24),
-                              child: Text(
-                                'Hunter Name',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.black),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 24),
-                              child: Text(
-                                '12,300 Points',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.black),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 16,
-                            )
-                          ],
-                        ),
-                      ),
-                      buildTopSectionForListveiw('Promo'),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 8.0,
-                          right: 8,
-                        ),
-                        child: Container(
-                          height: 220,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (ctx, index) => PromoListItem(
-                              imagePath: promo_dummy_data[index].imagePath,
-                              brand: promo_dummy_data[index].productBrandName,
-                              prName: promo_dummy_data[index].productName,
-                              prCurrentPrice:
-                                  promo_dummy_data[index].currentPrice,
-                              prPreviousPrice:
-                                  promo_dummy_data[index].previousPrice,
-                            ),
-                            itemCount: promo_dummy_data.length,
-                          ),
-                        ),
-                      ),
-                      buildTopSectionForListveiw('Categories'),
-                      Container(
-                        padding: EdgeInsets.all(8),
-                        height: 140,
-                        child: Container(
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (ctx, index) => CategoryListItem(
-                              iconPath: category_dummy_data[index].iconPath,
-                              categories:
-                                  category_dummy_data[index].categoryName,
-                            ),
-                            itemCount: category_dummy_data.length,
-                          ),
-                        ),
-                      ),
-                      buildTopSectionForListveiw('Deals by Shop'),
-                      Container(
-                        padding: EdgeInsets.all(8),
-                        height: 140,
-                        child: Container(
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (ctx, index) => DealsByShopItem(
-                              icon: deals_by_shop_dummy_data[index].icon,
-                              shopName:
-                                  deals_by_shop_dummy_data[index].shopName,
-                              index: index,
-                            ),
-                            itemCount: deals_by_shop_dummy_data.length,
-                          ),
-                        ),
-                      ),
-                      // buildTopSectionForListveiw('My Discount Card'),
-                      // Padding(
-                      //   padding: const EdgeInsets.all(8.0),
-                      //   child: Container(
-                      //     height: 250,
-                      //     child: Swiper(
-                      //       duration: 600,
-                      //       autoplay: true,
-                      //       itemBuilder: (ctx, index) => MembershipCard(),
-                      //       itemCount: 4,
-                      //       pagination: new SwiperPagination(),
-                      //     ),
-                      //   ),
-                      // ),
-                      buildTopSectionForListveiw('My Discount Card'),
-                      Container(
-                        child: Column(
-                          children: <Widget>[
-                            carouselSlider = CarouselSlider(
-                              viewportFraction: 1.0,
-                              aspectRatio: 2.0,
-                              height: 220.0,
-                              initialPage: 0,
-                              enlargeCenterPage: false,
-                              autoPlay: true,
-                              reverse: false,
-                              enableInfiniteScroll: true,
-                              autoPlayInterval: Duration(seconds: 6),
-                              autoPlayAnimationDuration:
-                                  Duration(milliseconds: 3000),
-                              pauseAutoPlayOnTouch: Duration(seconds: 4),
-                              scrollDirection: Axis.horizontal,
-                              onPageChanged: (index) {
-                                setState(() {
-                                  _current = index;
-                                });
-                              },
-                              items: imgList.map((imgUrl) {
-                                return Builder(
-                                  builder: (BuildContext context) {
-                                    return Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      margin: EdgeInsets.symmetric(
-                                          horizontal: 10.0),
-                                      decoration: BoxDecoration(
-                                          // color: Colors.green,
-                                          ),
-                                      child: MembershipCard(),
-                                    );
-                                  },
-                                );
-                              }).toList(),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: map<Widget>(imgList, (index, url) {
-                                return Container(
-                                  width: 10.0,
-                                  height: 10.0,
-                                  margin: EdgeInsets.symmetric(
-                                      vertical: 10.0, horizontal: 2.0),
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: _current == index
-                                        ? Color(0xff000c4f)
-                                        : Colors.white,
-                                  ),
-                                );
-                              }),
-                            ),
-                          ],
-                        ),
-                      ),
-                      buildTopSectionForListveiw('Brochures'),
-                      Container(
-                        padding: EdgeInsets.all(8),
-                        height: 140,
-                        child: Container(
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (ctx, index) => BrochureListItem(
-                              marketName:
-                                  brochure_dummy_data[index].sMarketName,
-                            ),
-                            itemCount: brochure_dummy_data.length,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+          onPressed: () {},
+        ),
+        appBar: AppBar(
+          backgroundColor: Color(0xff000c4f),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.search,
+                color: Colors.white,
               ),
+              onPressed: () {},
             ),
-            Expanded(
-                child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                        height: 80,
-                        width: deviceSize.width,
-                        color: Color(0xff333333),
-                        child: Text('Advertising',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(color: Colors.white)))))
           ],
         ),
-      ),
-    );
+        drawer: Drawer(),
+        body: Column(
+          children: <Widget>[
+            Container(
+              color: Color(0xff31c3d6),
+              height: _pageSize - (_appBarSize + _notifySize + 80),
+              child: ListView(
+                children: <Widget>[
+                  Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    margin: EdgeInsets.all(10),
+                    elevation: 4,
+                    color: Colors.amber,
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            IconButton(
+                              alignment: Alignment.centerLeft,
+                              iconSize: 48,
+                              icon: Icon(
+                                Icons.gps_fixed,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {},
+                            ),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 16),
+                              child: Text(
+                                'Hunter Card',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 32),
+                              ),
+                            ),
+                            Spacer()
+                          ],
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 24),
+                          child: Text(
+                            'Hunter Name',
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 24),
+                          child: Text(
+                            '12,300 Points',
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 16,
+                        )
+                      ],
+                    ),
+                  ),
+                  buildTopSectionForListveiw('Promo'),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 8.0,
+                      right: 8,
+                    ),
+                    child: Container(
+                      height: 220,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (ctx, index) => PromoListItem(
+                          imagePath: promo_dummy_data[index].imagePath,
+                          brand: promo_dummy_data[index].productBrandName,
+                          prName: promo_dummy_data[index].productName,
+                          prCurrentPrice: promo_dummy_data[index].currentPrice,
+                          prPreviousPrice:
+                              promo_dummy_data[index].previousPrice,
+                        ),
+                        itemCount: promo_dummy_data.length,
+                      ),
+                    ),
+                  ),
+                  buildTopSectionForListveiw('Categories'),
+                  Container(
+                    padding: EdgeInsets.all(8),
+                    height: 140,
+                    child: Container(
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (ctx, index) => CategoryListItem(
+                          iconPath: category_dummy_data[index].iconPath,
+                          categories: category_dummy_data[index].categoryName,
+                        ),
+                        itemCount: category_dummy_data.length,
+                      ),
+                    ),
+                  ),
+                  buildTopSectionForListveiw('Deals by Shop'),
+                  Container(
+                    padding: EdgeInsets.all(8),
+                    height: 140,
+                    child: Container(
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (ctx, index) => DealsByShopItem(
+                          icon: deals_by_shop_dummy_data[index].icon,
+                          shopName: deals_by_shop_dummy_data[index].shopName,
+                          index: index,
+                        ),
+                        itemCount: deals_by_shop_dummy_data.length,
+                      ),
+                    ),
+                  ),
+                  buildTopSectionForListveiw('My Discount Card'),
+                  Container(
+                    child: Column(
+                      children: <Widget>[
+                        carouselSlider = CarouselSlider(
+                          viewportFraction: 1.0,
+                          aspectRatio: 2.0,
+                          height: 220.0,
+                          initialPage: 0,
+                          enlargeCenterPage: false,
+                          autoPlay: true,
+                          reverse: false,
+                          enableInfiniteScroll: true,
+                          autoPlayInterval: Duration(seconds: 6),
+                          autoPlayAnimationDuration:
+                              Duration(milliseconds: 3000),
+                          pauseAutoPlayOnTouch: Duration(seconds: 4),
+                          scrollDirection: Axis.horizontal,
+                          onPageChanged: (index) {
+                            setState(() {
+                              _current = index;
+                            });
+                          },
+                          items: imgList.map((imgUrl) {
+                            return Builder(
+                              builder: (BuildContext context) {
+                                return Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  margin:
+                                      EdgeInsets.symmetric(horizontal: 10.0),
+                                  decoration: BoxDecoration(
+                                      // color: Colors.green,
+                                      ),
+                                  child: MembershipCard(),
+                                );
+                              },
+                            );
+                          }).toList(),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: map<Widget>(imgList, (index, url) {
+                            return Container(
+                              width: 10.0,
+                              height: 10.0,
+                              margin: EdgeInsets.symmetric(
+                                  vertical: 10.0, horizontal: 2.0),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: _current == index
+                                    ? Color(0xff000c4f)
+                                    : Colors.white,
+                              ),
+                            );
+                          }),
+                        ),
+                      ],
+                    ),
+                  ),
+                  buildTopSectionForListveiw('Brochures'),
+                  Container(
+                    padding: EdgeInsets.all(8),
+                    height: 140,
+                    child: Container(
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (ctx, index) => BrochureListItem(
+                          marketName: brochure_dummy_data[index].sMarketName,
+                        ),
+                        itemCount: brochure_dummy_data.length,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+                height: 80,
+                width: deviceSize.width,
+                color: Color(0xff333333),
+                child: Text('Advertising',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(color: Colors.white)))
+          ],
+        ));
   }
 }
