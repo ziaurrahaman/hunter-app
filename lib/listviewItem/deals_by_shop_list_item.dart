@@ -15,7 +15,7 @@ class DealsByShopItem extends StatelessWidget {
       width: 120,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(8)),
-          color: index.isEven ? Colors.indigo[900] : Colors.amber),
+          color: index.isEven ? Color(0xff000c4f) : Colors.amber),
       child: Column(
         children: <Widget>[
           icon,

@@ -36,7 +36,7 @@ class MembershipCard extends StatelessWidget {
                       width: 60,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.black,
+                        color: Color(0xff000c4f),
                       ),
                     ),
                   ],
@@ -59,12 +59,12 @@ class MembershipCard extends StatelessWidget {
               children: <Widget>[
                 Icon(
                   MdiIcons.barcode,
-                  color: Colors.black,
+                  color: Color(0xff000c4f),
                   size: 72,
                 ),
                 Icon(
                   MdiIcons.barcode,
-                  color: Colors.black,
+                  color: Color(0xff000c4f),
                   size: 72,
                 ),
               ],

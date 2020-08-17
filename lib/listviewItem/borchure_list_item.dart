@@ -8,8 +8,8 @@ class BrochureListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         margin: EdgeInsets.all(4),
-        height: 120,
-        width: 320,
+        height: 130,
+        width: 340,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.all(Radius.circular(8))),
@@ -17,8 +17,8 @@ class BrochureListItem extends StatelessWidget {
           children: <Widget>[
             Container(
               margin: EdgeInsets.all(8),
-              height: 130,
-              width: 100,
+              height: 110,
+              width: 105,
               decoration: BoxDecoration(
                   color: Colors.grey[300],
                   borderRadius: BorderRadius.all(Radius.circular(4))),
@@ -26,31 +26,44 @@ class BrochureListItem extends StatelessWidget {
             Container(
               width: 200,
               child: ListTile(
-                title: Text(
-                  marketName,
-                  style: TextStyle(
-                      color: Colors.indigo[900], fontWeight: FontWeight.bold),
+                title: Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(
+                    marketName,
+                    style: TextStyle(
+                        color: Color(0xff000c4f), fontWeight: FontWeight.bold),
+                  ),
                 ),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Text(
-                      'Start: 30 Jan 2020',
-                      style: TextStyle(color: Colors.grey),
-                      textAlign: TextAlign.start,
-                    ),
-                    Text(
-                      'End: 30 Dec 2020',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    Text(
-                      '30 Days left',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ],
+                subtitle: Padding(
+                  padding: const EdgeInsets.only(bottom: 38.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2, bottom: 2),
+                        child: Text(
+                          'Start: 30 Jan 2020',
+                          style: TextStyle(color: Colors.grey),
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2, bottom: 2),
+                        child: Text(
+                          'End: 30 Dec 2020',
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2, bottom: 2),
+                        child: Text(
+                          '30 Days left',
+                          style: TextStyle(color: Colors.grey),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
